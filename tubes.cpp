@@ -14,7 +14,7 @@ class grafik
 private:
     /* data */
 protected:
-    void kategori()
+    void menuKategori()
     {
         cout << "Silahkan Pilih Kategori Dibawah : \n";
         cout << "1. Mata\n";
@@ -341,7 +341,7 @@ protected:
         startPasien();
     }
     
-    void tambah(int kategori, string keluhan)
+    void tambah(string kategori, string keluhan)
     {
         int idPasien = vecPasien.size() + 1;
         time_t tt = time(0);
@@ -647,6 +647,32 @@ protected:
             cout << "Anda tidak memiliki keluhan" << endl << endl;
         }
     }
+
+    void kategori(string type)
+    {
+        int cek=0, nomor=1;
+        for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
+        {
+            if (it->kategori == type)
+            {
+                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                    << "Kategori : " << it->kategori << endl
+                    << "Keluhan\t : " << it->keluhan << endl
+                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
+                    << "Tanggal Checkin\t : " << it->tglCheckIn << endl
+                    << "Tanggal Checkout\t : " << it->tglCheckOut << endl
+                    << "Tagihan\t : " << it->tagihan << endl
+                    << "Status Tagihan\t : " << it->statusTagihan << endl;
+                cout << endl;
+                nomor++;
+                cek = 1;
+            }
+        }
+        if (cek == 0)
+        {
+            cout << "Anda tidak memiliki Pasien" << endl << endl;
+        }
+    }
 };
 
 class user: protected grafik, protected pasien, protected akun
@@ -698,9 +724,29 @@ protected:
     {
         int type,x=1;
         char pilih;
-        string isi;
-        kategori();
+        string isi, kategori;
+        menuKategori();
         cin >> type;
+        if (type == 1)
+        {
+            kategori = "Mata";
+        } else if (type == 2)
+        {
+            kategori = "THT";
+        } else if (type == 3)
+        {
+            kategori = "Kulit";
+        } else if (type == 4)
+        {
+            kategori = "Jantung";
+        } else if (type == 5)
+        {
+            kategori = "Gigi";
+        } else if (type == 6)
+        {
+            kategori = "Penyakit Dalam";
+        }
+        
         cout << "Keluhan\n";
         cin.ignore();
         getline(cin, isi);
@@ -716,7 +762,7 @@ protected:
             switch (pilih)
             {
             case '1':
-                tambah(type, isi);
+                tambah(kategori, isi);
                 x=0;
                 break;
             
@@ -806,7 +852,7 @@ protected:
                 break;
             
             case '5':
-                kategori();
+                cekKategori();
                 break;
 
             case '6':
@@ -978,9 +1024,32 @@ protected:
         } while (x==1);
     }
 
-    void kategori()
+    void cekKategori()
     {
-        
+        int type;
+        string jenis;
+        menuKategori();
+        cin >> type;
+        if (type == 1)
+        {
+            jenis = "Mata";
+        } else if (type == 2)
+        {
+            jenis = "THT";
+        } else if (type == 3)
+        {
+            jenis = "Kulit";
+        } else if (type == 4)
+        {
+            jenis = "Jantung";
+        } else if (type == 5)
+        {
+            jenis = "Gigi";
+        } else if (type == 6)
+        {
+            jenis = "Penyakit Dalam";
+        }
+        kategori(jenis);
     }
 
     void cekTagihan()
