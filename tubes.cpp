@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include "sha256.cpp"
 using namespace std;
 
 int idNow;
@@ -23,7 +24,7 @@ protected:
         cout << "5. Keluar\n";
     }
 
-    void utamaUser()
+    void menuUtamaUser()
     {
         cout << "1. Pengajuan\n";
         cout << "2. Cek Status\n";
@@ -33,7 +34,7 @@ protected:
         cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
     }
 
-    void utamaAdmin()
+    void menuUtamaAdmin()
     {
         cout << "1. Cek User\n";
         cout << "2. Cek Pengajuan User\n";
@@ -108,10 +109,12 @@ protected:
 
     int login(string x, string y)
     {
+        SHA256 sha256;
+        string hash = sha256(y);
         int cek=0;
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
-            if (it->username == x && it->password == y)
+            if (it->username == x && it->password == hash)
             {
                 if (it->level == 1)
                 {
@@ -126,10 +129,7 @@ protected:
                 }
             }
         }
-        if (cek == 0)
-        {
-            return 0;
-        }
+        return 0;
     }
 
     void registrasi(string nik, string nama, string username, string password)
@@ -220,10 +220,7 @@ protected:
                 return 1;
             }
         }
-        if (cek == 0)
-        {
-            return 0;
-        }
+        return 0;
     }
 
     void updateUser(int id, int nik, string nama, string user, string pass)
@@ -449,7 +446,7 @@ protected:
                 {
                     if (it->idAkun == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",accepted," << it->tglPengajuan << "," << waktuCheckIn << ",null,null,null";
+                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," << waktuCheckIn << ",null,null,null";
                     }
                     if (it->idAkun != id)
                     {
@@ -498,7 +495,7 @@ protected:
         int cek=0, nomor=1;
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->statusPasien=="accepted")
+            if (it->statusPasien=="treated")
             {
                 cout << nomor << "Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
@@ -648,18 +645,18 @@ protected:
     }
 };
 
-class user: protected grafik, private pasien, private akun
+class user: protected grafik, protected pasien, protected akun
 {
 private:
     /* data */
 protected:
-    void utama()
+    void utamaUser()
     {
         int x=1;
         char pilih;
         do
         {
-            utamaUser();
+            menuUtamaUser();
             cin >> pilih;
             cout <<endl;
             system("cls");
@@ -770,18 +767,18 @@ protected:
     }
 };
 
-class admin: private pasien, private akun, private grafik
+class admin: protected user
 {
 private:
     /* data */
 protected:
-    void utama()
+    void utamaAdmin()
     {
         int x=1;
         char pilih;
         do
         {
-            utamaAdmin();
+            menuUtamaAdmin();
             cin >> pilih;
             cout <<endl;
             system("cls");
@@ -1022,7 +1019,7 @@ protected:
     }
 };
 
-class auth: private akun, private user
+class auth: protected admin
 {
 private:
     /* data */
@@ -1037,10 +1034,10 @@ protected:
         cout << endl;
         if (akun::login(user, pass) == 2)
         {
-            utama();
+            utamaUser();
         } else if (akun::login(user, pass) == 1)
         {
-            /* code */
+            utamaAdmin();
         }
         else
         {
@@ -1051,7 +1048,8 @@ protected:
 
     void menuRegistrasi()
     {
-        string nik, nama, user, pass;
+        SHA256 sha256;
+        string nik, nama, user, pass, hash;
         cout << "Masukan NIK : ";
         cin >> nik;
         cout << "Masukan Nama Lengkap : ";
@@ -1061,8 +1059,9 @@ protected:
         cin >> user;
         cout << "Masukan Password : ";
         cin >> pass;
+        hash = sha256(pass);
         cout << endl;
-        akun::registrasi(nik, nama, user, pass);
+        akun::registrasi(nik, nama, user, hash);
     }
 };
 
