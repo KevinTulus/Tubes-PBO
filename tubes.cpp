@@ -17,11 +17,13 @@ protected:
     void kategori()
     {
         cout << "Silahkan Pilih Kategori Dibawah : \n";
-        cout << "1. Pengajuan\n";
-        cout << "2. Cek Status\n";
-        cout << "3. Tagihan\n";
-        cout << "4. Profile\n";
-        cout << "5. Keluar\n";
+        cout << "1. Mata\n";
+        cout << "2. THT\n";
+        cout << "3. Kulit\n";
+        cout << "4. Jantung\n";
+        cout << "5. Gigi\n";
+        cout << "6. Penyakit Dalam\n";
+        cout << "7. Keluar\n";
     }
 
     void menuUtamaUser()
@@ -149,7 +151,9 @@ protected:
         {
             if (it->idAkun == idNow)
             {
-                cout << "Username : " << it->username << endl
+                cout << "NIK : " << it->nik << endl
+                    << "Nama : " << it->nama << endl
+                    << "Username : " << it->username << endl
                     << "Password : " << it->password << endl;
                 cout << endl;
             }
@@ -549,7 +553,7 @@ protected:
         int cek=0, nomor=1;
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->statusPasien=="has recovered")
+            if (it->statusPasien=="has checkout")
             {
                 cout << nomor << "Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
