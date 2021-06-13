@@ -97,7 +97,7 @@ protected:
             string levelStr;
             getline(ss, levelStr, ',');
             tempAkun.level = stoi(levelStr);
-            ss >> tempAkun.buatAkun;
+            getline(ss, tempAkun.buatAkun, ',');
             vecAkun.push_back(tempAkun);
         }
         inAkun.close();
@@ -110,9 +110,9 @@ protected:
         int cek = 0;
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
-            if (it->level != 1)
+            if (it->idAkun == 0)
             {
-                cek = 1;
+                cek++;
             }
         }
         if (cek == 0)
@@ -210,10 +210,10 @@ protected:
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Diubah" <<endl;
+                cout << "Profil Telah Diubah" <<endl<<endl;
             } else if (it->idAkun == idNow && it->password != lama)
             {
-                cout << "password salah" << endl;
+                cout << "password salah" << endl<<endl;
             }
         }   
     }
@@ -267,24 +267,23 @@ protected:
                 ofstream out2("akun.csv", ios::app);
                 for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
                 {
-                    if (it->idAkun != idNow)
+                    if (it->idAkun != id)
                     {
                         out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< ","  << it->password << "," << it->level << "," << it->buatAkun;
-                    } else if (it->idAkun == idNow)
+                    } else if (it->idAkun == id)
                     {
-                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << it->password << "," << it->level << ","  << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << it->password << "," << it->level << "," << it->buatAkun;
                     }
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Diubah" <<endl;
+                cout << "Profil Telah Diubah" <<endl<<endl;
             }
         }
     }
 
     void hapusUser(int id)
     {
-        int cek=0;
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
             if (it->idAkun == id && it->level == 2)
@@ -295,22 +294,18 @@ protected:
                 ofstream out2("akun.csv", ios::app);
                 for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
                 {
-                    if (it->idAkun != idNow)
+                    if (it->idAkun != id)
                     {
                         out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->level << "," << it->buatAkun;
                     }
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Diubah" <<endl;
-                cek = 1;
-            }
-            if (cek == 0)
-            {
-                cout << "User Tidak Ditemukan" << endl;
+                cout << "Profil Telah Dihapus" <<endl<<endl;
             }
         }
     }
+
 };
 
 class pasien
@@ -357,7 +352,10 @@ protected:
             getline(ss, tempPasien.tglPengajuan, ',');
             getline(ss, tempPasien.tglCheckIn, ',');
             getline(ss, tempPasien.tglCheckOut, ',');
-            ss >> tempPasien.statusTagihan;
+            string tagihanStr;
+            getline(ss, tagihanStr, ',');
+            tempPasien.tagihan = stoi(tagihanStr);
+            getline(ss, tempPasien.statusTagihan, ',');
             vecPasien.push_back(tempPasien);
         }
         inPasien.close();
@@ -378,7 +376,7 @@ protected:
         ofstream out("pasien.csv", ios::app);
         out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",pending," 
             << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year 
-            << ",null,null,null,null";
+            << ",tidak checkin,tidak checkout,0,tidak memiliki tagihan";
         out.close();
         restartPasien();
     }
@@ -465,30 +463,31 @@ protected:
     {
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idPasien == id)
             {
                 ofstream out1("pasien.csv");
-                out1 << "idAkun,nik,nama,username,password,level,buatAkun";
+                out1 << "idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOut,tagihan,statusTagihan";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
                 time_t now = time(0);
                 tm* ltm = localtime(&now);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
-                    if (it->idAkun == id)
+                    if (it->idPasien == id)
                     {
                         out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," 
                             << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year
-                            << ",null,null,null";
+                            << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
-                    if (it->idAkun != id)
+                    if (it->idPasien != id)
                     {
-                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                            << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl;
+                cout << "Data Telah Diubah" <<endl<<endl;
             }
         }
     }
@@ -497,26 +496,28 @@ protected:
     {
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idPasien == id)
             {
                 ofstream out1("pasien.csv");
-                out1 << "idAkun,nik,nama,username,password,level,buatAkun";
+                out1 << "idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOut,tagihan,statusTagihan";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
-                    if (it->idAkun == id)
+                    if (it->idPasien == id)
                     {
-                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",rejected," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",rejected," << it->tglPengajuan 
+                            << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
-                    if (it->idAkun != id)
+                    if (it->idPasien != id)
                     {
-                        out2 <<endl  << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                            << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl;
+                cout << "Data Telah Diubah" <<endl<<endl;
             }
         }
     }
@@ -549,30 +550,31 @@ protected:
     {
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idPasien == id)
             {
                 ofstream out1("pasien.csv");
-                out1 << "idAkun,nik,nama,username,password,level,buatAkun";
+                out1 << "idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOut,tagihan,statusTagihan";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
                 time_t now = time(0);
                 tm* ltm = localtime(&now);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
-                    if (it->idAkun == id)
+                    if (it->idPasien == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",has checkout," << it->tglPengajuan << "," << it->tglCheckIn << "," 
+                        out2 << endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",has checkout," << it->tglPengajuan << "," << it->tglCheckIn << "," 
                             << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year
                             << "," << tagihan << ",not paid yet";
                     }
-                    if (it->idAkun != id)
+                    if (it->idPasien != id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << "," << it->tglCheckIn << ",null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                            << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl;
+                cout << "Data Telah Diubah" <<endl<<endl;
             }
         }
     }
@@ -630,23 +632,25 @@ protected:
             if (it->idPasien == id)
             {
                 ofstream out1("pasien.csv");
-                out1 << "idAkun,nik,nama,username,password,level,buatAkun";
+                out1 << "idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOut,tagihan,statusTagihan";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
                     if (it->idPasien == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << ",paid";
+                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                            << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << ",paid";
                     }
                     if (it->idPasien != id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
+                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                            << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl;
+                cout << "Data Telah Diubah" <<endl<<endl;
             }
         }
     }
@@ -715,7 +719,6 @@ protected:
         char pilih;
         do
         {
-            system("cls");
             menuUtamaUser();
             cin >> pilih;
             cout <<endl;
@@ -752,44 +755,55 @@ protected:
 
     void pengajuan()
     {
-        int type,x=1;
-        char pilih;
+        int x=1, y=1;
+        char type, pilih;
         string isi, kategori;
-        menuKategori();
-        cin >> type;
-        
-        switch (type)
+        do
         {
-        case '1':
-            kategori = "Mata";
-            break;
-        
-        case '2':
-            kategori = "THT";
-            break;
-        
-        case '3':
-            kategori = "Kulit";
-            break;
+            menuKategori();
+            cin >> type;
+            switch (type)
+            {
+            case '1':
+                kategori = "Mata";
+                y=0;
+                break;
+            
+            case '2':
+                kategori = "THT";
+                y=0;
+                break;
+            
+            case '3':
+                kategori = "Kulit";
+                y=0;
+                break;
 
-        case '4':
-            kategori = "Jantung";
-            break;
+            case '4':
+                kategori = "Jantung";
+                y=0;
+                break;
 
-        case '5':
-            kategori = "Gigi";
-            break;
+            case '5':
+                kategori = "Gigi";
+                y=0;
+                break;
 
-        case '6':
-            kategori = "Penyakit Dalam";
-            break;
+            case '6':
+                kategori = "Penyakit Dalam";
+                y=0;
+                break;
+            
+            default:
+                cout << "Input Salah\n\n";
+                break;
+            }
+        } while (y == 1);
         
-        default:
-            break;
-        }
+        
         system("cls");
         cout << kategori << endl;
-        cout << "Keluhan\n";
+        cout << "Keluhan :\n";
         cin.ignore();
         getline(cin, isi);
         do
@@ -870,11 +884,10 @@ protected:
         char pilih;
         do
         {
-            system("cls");
-            cout << "Keluhan\n";
             menuUtamaAdmin();
             cin >> pilih;
             cout <<endl;
+            system("cls");
             
             switch (pilih)
             {
@@ -928,14 +941,14 @@ protected:
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Akun : ";
                 cin >> id;
                 cout <<endl;
                 riwayatUser(id);
                 break;
             
             case '2':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Akun : ";
                 cin >> id;
                 cout <<endl;
                 if (cekIdUser(id) == 1)
@@ -947,8 +960,6 @@ protected:
                     getline(cin, nama);
                     cout << "Masukan Username : ";
                     cin >> user;
-                    cout << "Masukan Password : ";
-                    cin >> pass;
                     cout << endl;
                     updateUser(id, nik, nama, user);
                 } else 
@@ -958,10 +969,16 @@ protected:
                 break;
 
             case '3':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Akun : ";
                 cin >> id;
                 cout << endl;
-                hapusUser(id);
+                if (cekIdUser(id) == 1)
+                {
+                    hapusUser(id);
+                } else 
+                {
+                    cout << "User tidak ditemukan \n";
+                }
                 break;
 
             case '4':
@@ -992,10 +1009,10 @@ protected:
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Pasien : ";
                 cin >> id;
                 cout <<endl;
-                if (cekIdUser(id) == 1)
+                if (cekIdPasien(id) == 1)
                 {
                     terimaPengajuan(id);
                 } else 
@@ -1005,10 +1022,10 @@ protected:
                 break;
             
             case '2':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Pasien : ";
                 cin >> id;
                 cout <<endl;
-                if (cekIdUser(id) == 1)
+                if (cekIdPasien(id) == 1)
                 {
                     tolakPengajuan(id);
                 } else 
@@ -1044,10 +1061,10 @@ protected:
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Pasien : ";
                 cin >> id;
                 cout <<endl;
-                if (cekIdUser(id) == 1)
+                if (cekIdPasien(id) == 1)
                 {
                     cout << "Masukan Tagihan User : ";
                     cin >> tagihan;
@@ -1077,37 +1094,49 @@ protected:
         do
         {
             menuKategori();
+            cout << "7. Keluar\n";
             cin >> pilih;
-            if (pilih == 1)
+            switch (pilih)
             {
+            case '1':
                 jenis = "Mata";
-            } else if (pilih == 2)
-            {
-                jenis = "THT";
-            } else if (pilih == 3)
-            {
-                jenis = "Kulit";
-            } else if (pilih == 4)
-            {
-                jenis = "Jantung";
-            } else if (pilih == 5)
-            {
-                jenis = "Gigi";
-            } else if (pilih == 6)
-            {
-                jenis = "Penyakit Dalam";
-            }
-            cout <<endl;
-            if (pilih <= 6)
-            {
                 kategori(jenis);
-            } else if (pilih = 7)
-            {
-                x = 0;
-            }
-        } while (x==1);
+                break;
+            
+            case '2':
+                jenis = "THT";
+                kategori(jenis);
+                break;
+            
+            case '3':
+                jenis = "Kulit";
+                kategori(jenis);
+                break;
 
-        
+            case '4':
+                jenis = "Jantung";
+                kategori(jenis);
+                break;
+
+            case '5':
+                jenis = "Gigi";
+                kategori(jenis);
+                break;
+
+            case '6':
+                jenis = "Penyakit Dalam";
+                kategori(jenis);
+                break;
+
+            case '7':
+                x=0;
+                break;
+            
+            default:
+                cout << "Input Salah\n\n";
+                break;
+            }
+        } while (x == 1);
     }
 
     void cekTagihan()

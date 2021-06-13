@@ -1,3 +1,2 @@
-idAkun,nik,nama,username,password,buatAkun
-0,0,admin,admin,d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1,1,20:13:55 13-6-2021
-1,12345,Kevin Tulus,tulus,d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1,2,18:37:45
+idAkun,nik,nama,username,password,level,buatAkun
+0,0,admin,admin,d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1,1,22:37:30

@@ -1,2 +1,2 @@
 idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOut,tagihan,statusTagihan
-1,1,Mata,sakit mata,pending,18:11:22 13-6-2021,null,null,null,null
+1,1,Mata,sakit mata,treated,23:50:20 13-6-2021,23:54:7 13-6-2021,tidak checkout,0,tidak memiliki tagihan
