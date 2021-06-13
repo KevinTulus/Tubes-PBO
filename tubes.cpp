@@ -201,7 +201,7 @@ protected:
         {
             if (it->level != 1)
             {
-                cout << nomor << "Id Akun : " << it->idAkun << endl
+                cout << nomor << ". Id Akun : " << it->idAkun << endl
                     << "NIK : " << it->nik << endl
                     << "Nama : " << it->nama << endl
                     << "Username\t : " << it->username << endl
@@ -369,7 +369,7 @@ protected:
             if (it->idAkun == idNow)
             {
                 cek = 1;
-                cout << nomor << "Kategori : " << it->kategori << endl
+                cout << nomor << ". Kategori : " << it->kategori << endl
                     << "Keluhan : " << it->keluhan << endl
                     << "Tanggal Pengajuan : " << it->tglPengajuan << endl
                     << "Status\t : " << it->statusPasien << endl;
@@ -409,7 +409,7 @@ protected:
         {
             if (it->statusPasien=="pending")
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
@@ -506,7 +506,7 @@ protected:
         {
             if (it->statusPasien=="treated")
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
@@ -562,7 +562,7 @@ protected:
         {
             if (it->statusPasien=="has checkout")
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
@@ -587,7 +587,7 @@ protected:
         {
             if (it->statusPasien=="has checkout" && it->statusTagihan=="not paid yet")
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
                     << "Tagihan : " << it->tagihan << endl;
                 cout << endl;
@@ -636,7 +636,7 @@ protected:
         {
             if (it->idAkun == id)
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
                     << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
@@ -662,7 +662,7 @@ protected:
         {
             if (it->kategori == type)
             {
-                cout << nomor << "Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
                     << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
