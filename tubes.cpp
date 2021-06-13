@@ -178,10 +178,10 @@ protected:
                 {
                     if (it->idAkun != idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username << "," << it->password << "," << it->level << "," << it->buatAkun;
                     } else if (it->idAkun == idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << user << "," << hashBaru << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << user << "," << hashBaru << "," << it->level << "," << it->buatAkun;
                     }
                 }
                 out2.close();
@@ -247,10 +247,10 @@ protected:
                 {
                     if (it->idAkun != idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< ","  << it->password << "," << it->level << "," << it->buatAkun;
                     } else if (it->idAkun == idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << hash << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << hash << "," << it->level << ","  << it->buatAkun;
                     }
                 }
                 out2.close();
@@ -275,7 +275,7 @@ protected:
                 {
                     if (it->idAkun != idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->level << "," << it->buatAkun;
                     }
                 }
                 out2.close();
