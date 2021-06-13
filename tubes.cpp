@@ -639,12 +639,12 @@ protected:
                 {
                     if (it->idPasien == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
                             << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << ",paid";
                     }
                     if (it->idPasien != id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien 
                             << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
                 }
