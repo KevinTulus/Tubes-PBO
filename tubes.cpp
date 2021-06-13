@@ -436,10 +436,7 @@ protected:
                 return 1;
             }
         }
-        if (cek == 0)
-        {
-            return 0;
-        }
+        return 0;
     }
 
     void terimaPengajuan(int id)
@@ -608,7 +605,7 @@ protected:
     {
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idPasien == id)
             {
                 ofstream out1("pasien.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
@@ -616,11 +613,11 @@ protected:
                 ofstream out2("pasien.csv", ios::app);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
-                    if (it->idAkun == id)
+                    if (it->idPasien == id)
                     {
                         out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << ",paid";
                     }
-                    if (it->idAkun != id)
+                    if (it->idPasien != id)
                     {
                         out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << "," << it->tglCheckIn << "," << it->tglCheckOut << "," << it->tagihan << "," << it->statusTagihan;
                     }
@@ -891,19 +888,20 @@ protected:
             menuCekUser();
             cin >> pilih;
             cout <<endl;
-            system("cls");
             
             switch (pilih)
             {
             case '1':
                 cout << "Masukan Id User : ";
                 cin >> id;
+                cout <<endl;
                 riwayatUser(id);
                 break;
             
             case '2':
                 cout << "Masukan Id User : ";
                 cin >> id;
+                cout <<endl;
                 if (cekIdUser(id) == 1)
                 {
                     cout << "Masukan NIK : ";
@@ -954,13 +952,13 @@ protected:
             cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
             cin >> pilih;
             cout <<endl;
-            system("cls");
             
             switch (pilih)
             {
             case '1':
                 cout << "Masukan Id User : ";
                 cin >> id;
+                cout <<endl;
                 if (cekIdUser(id) == 1)
                 {
                     terimaPengajuan(id);
@@ -973,6 +971,7 @@ protected:
             case '2':
                 cout << "Masukan Id User : ";
                 cin >> id;
+                cout <<endl;
                 if (cekIdUser(id) == 1)
                 {
                     tolakPengajuan(id);
@@ -1005,13 +1004,13 @@ protected:
             cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
             cin >> pilih;
             cout <<endl;
-            system("cls");
             
             switch (pilih)
             {
             case '1':
                 cout << "Masukan Id User : ";
                 cin >> id;
+                cout <<endl;
                 if (cekIdUser(id) == 1)
                 {
                     cout << "Masukan Tagihan User : ";
@@ -1036,30 +1035,43 @@ protected:
 
     void cekKategori()
     {
-        int type;
+        int x=1, id;
+        char pilih;
         string jenis;
-        menuKategori();
-        cin >> type;
-        if (type == 1)
+        do
         {
-            jenis = "Mata";
-        } else if (type == 2)
-        {
-            jenis = "THT";
-        } else if (type == 3)
-        {
-            jenis = "Kulit";
-        } else if (type == 4)
-        {
-            jenis = "Jantung";
-        } else if (type == 5)
-        {
-            jenis = "Gigi";
-        } else if (type == 6)
-        {
-            jenis = "Penyakit Dalam";
-        }
-        kategori(jenis);
+            menuKategori();
+            cin >> pilih;
+            if (pilih == 1)
+            {
+                jenis = "Mata";
+            } else if (pilih == 2)
+            {
+                jenis = "THT";
+            } else if (pilih == 3)
+            {
+                jenis = "Kulit";
+            } else if (pilih == 4)
+            {
+                jenis = "Jantung";
+            } else if (pilih == 5)
+            {
+                jenis = "Gigi";
+            } else if (pilih == 6)
+            {
+                jenis = "Penyakit Dalam";
+            }
+            cout <<endl;
+            if (pilih <= 6)
+            {
+                kategori(jenis);
+            } else if (pilih = 7)
+            {
+                x = 0;
+            }
+        } while (x==1);
+
+        
     }
 
     void cekTagihan()
@@ -1074,14 +1086,13 @@ protected:
             cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
             cin >> pilih;
             cout <<endl;
-            system("cls");
             
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id User : ";
+                cout << "Masukan Id Pasien : ";
                 cin >> id;
-                if (cekIdUser(id) == 1)
+                if (cekIdPasien(id) == 1)
                 {
                     bayarTagihan(id);
                 } else 
