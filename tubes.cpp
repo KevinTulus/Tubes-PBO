@@ -16,44 +16,44 @@ private:
 protected:
     void menuKategori()
     {
-        cout << "Silahkan Pilih Kategori Dibawah : \n";
+        cout << "Silahkan pilih kategori dibawah : \n";
         cout << "1. Mata\n";
         cout << "2. THT\n";
         cout << "3. Kulit\n";
         cout << "4. Jantung\n";
         cout << "5. Gigi\n";
-        cout << "6. Penyakit Dalam\n";
+        cout << "6. Penyakit dalam\n";
     }
 
     void menuUtamaUser()
     {
         cout << "1. Pengajuan\n";
-        cout << "2. Cek Status\n";
+        cout << "2. Cek status\n";
         cout << "3. Tagihan\n";
         cout << "4. Profile\n";
         cout << "5. Keluar\n";
-        cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+        cout << "Silahkan pilih operasi yang diinginkan : ";
     }
 
     void menuUtamaAdmin()
     {
-        cout << "1. Cek User\n";
-        cout << "2. Cek Pengajuan User\n";
-        cout << "3. Cek User yang Dirawat\n";
-        cout << "4. Cek User yang Telah Sembuh\n";
-        cout << "5. Cek Berdasarkan Kategori\n";
-        cout << "6. Cek Tagihan\n";
+        cout << "1. Cek user\n";
+        cout << "2. Cek pengajuan user\n";
+        cout << "3. Cek user yang dirawat\n";
+        cout << "4. Cek user yang telah sembuh\n";
+        cout << "5. Cek berdasarkan kategori\n";
+        cout << "6. Cek tagihan\n";
         cout << "7. Keluar\n";
-        cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+        cout << "Silahkan pilih operasi yang diinginkan : ";
     }
 
     void menuCekUser()
     {
-        cout << "1. Riwayat User\n";
-        cout << "2. Update User\n";
-        cout << "3. Hapus User\n";
-        cout << "4. keluar\n";;
-        cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+        cout << "1. Riwayat user\n";
+        cout << "2. Update user\n";
+        cout << "3. Hapus user\n";
+        cout << "4. Keluar\n";;
+        cout << "Silahkan pilih operasi yang diinginkan : ";
     }
 };
 
@@ -176,10 +176,10 @@ protected:
         {
             if (it->idAkun == idNow)
             {
-                cout << "NIK : " << it->nik << endl
-                    << "Nama : " << it->nama << endl
-                    << "Username : " << it->username << endl
-                    << "Password : " << it->password << endl;
+                cout << "NIK \t\t: " << it->nik << endl
+                    << "Nama \t\t: " << it->nama << endl
+                    << "Username \t: " << it->username << endl
+                    << "Password \t: " << it->password << endl;
                 cout << endl;
             }
         }
@@ -210,10 +210,12 @@ protected:
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Profil telah diubah" <<endl<<endl;
             } else if (it->idAkun == idNow && it->password != lama)
             {
-                cout << "password salah" << endl<<endl;
+                system("cls");
+                cout << "Password salah" << endl<<endl;
             }
         }   
     }
@@ -225,11 +227,11 @@ protected:
         {
             if (it->level != 1)
             {
-                cout << nomor << ". Id Akun : " << it->idAkun << endl
-                    << "NIK : " << it->nik << endl
-                    << "Nama : " << it->nama << endl
-                    << "Username\t : " << it->username << endl
-                    << "Tanggal Dibuat\t : " << it->buatAkun << endl;
+                cout << nomor << ". Id akun \t\t: " << it->idAkun << endl
+                    << "   NIK \t\t\t: " << it->nik << endl
+                    << "   Nama \t\t: " << it->nama << endl
+                    << "   Username \t\t: " << it->username << endl
+                    << "   Tanggal dibuat \t: " << it->buatAkun << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -237,7 +239,7 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki keluhan" << endl << endl;
+            cout << "Tidak terdapat user" << endl << endl;
         }
     }
 
@@ -277,7 +279,8 @@ protected:
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Profil telah diubah" <<endl<<endl;
             }
         }
     }
@@ -301,7 +304,8 @@ protected:
                 }
                 out2.close();
                 restartAkun();
-                cout << "Profil Telah Dihapus" <<endl<<endl;
+                system("cls");
+                cout << "Profil telah dihapus" <<endl<<endl;
             }
         }
     }
@@ -379,6 +383,8 @@ protected:
             << ",tidak checkin,tidak checkout,0,tidak memiliki tagihan";
         out.close();
         restartPasien();
+        system("cls");
+        cout << "Keluhan telah ditambahkan" << endl << endl;
     }
 
     void status()
@@ -389,16 +395,17 @@ protected:
             if (it->idAkun == idNow)
             {
                 cek = 1;
-                cout << nomor << ". Kategori : " << it->kategori << endl
-                    << "Keluhan : " << it->keluhan << endl
-                    << "Tanggal Pengajuan : " << it->tglPengajuan << endl
-                    << "Status\t : " << it->statusPasien << endl;
+                cout << nomor << ". Kategori \t\t: " << it->kategori << endl
+                    << "   Keluhan \t\t: " << it->keluhan << endl
+                    << "   Tanggal pengajuan \t: " << it->tglPengajuan << endl
+                    << "   Status \t\t: " << it->statusPasien << endl;
                 cout << endl;
                 nomor++;
             }
         }
         if (cek == 0)
         {
+            system("cls");
             cout << "Anda tidak memiliki keluhan" << endl << endl;
         }
     }
@@ -408,7 +415,7 @@ protected:
         int cek=0, nomor=1;
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->idAkun == idNow && it->statusPasien=="has recovered")
+            if (it->idAkun == idNow && it->statusPasien=="has checkout")
             {
                 cek = 1;
                 cout << nomor << ". " << it->tagihan << "\t" << it->statusTagihan << endl;
@@ -418,7 +425,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki tagihan" << endl << endl;
+            system("cls");
+            cout << "Anda tidak terdapat tagihan" << endl << endl;
         }
     }
 
@@ -429,11 +437,11 @@ protected:
         {
             if (it->statusPasien =="pending")
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
+                cout << nomor << ". Id pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
                     << "Kategori : " << it->kategori << endl
                     << "Keluhan\t : " << it->keluhan << endl
-                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl;
+                    << "Tanggal pengajuan\t : " << it->tglPengajuan << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -441,7 +449,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki keluhan" << endl << endl;
+            system("cls");
+            cout << "Tidak terdapat keluhan" << endl << endl;
         }
     }
     
@@ -487,7 +496,8 @@ protected:
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Pengajuan telah diterima" <<endl<<endl;
             }
         }
     }
@@ -517,7 +527,8 @@ protected:
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Pengajuan telah ditolak" <<endl<<endl;
             }
         }
     }
@@ -529,12 +540,12 @@ protected:
         {
             if (it->statusPasien=="treated")
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
-                    << "Id Akun : " << it->idAkun << endl
-                    << "Kategori : " << it->kategori << endl
-                    << "Keluhan\t : " << it->keluhan << endl
-                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
-                    << "Tanggal Checkin\t : " << it->tglCheckIn << endl;
+                cout << nomor << ". Id Pasien \t\t: " << it->idPasien << endl
+                    << "   Id Akun \t\t: " << it->idAkun << endl
+                    << "   Kategori \t\t: " << it->kategori << endl
+                    << "   Keluhan \t\t: " << it->keluhan << endl
+                    << "   Tanggal Pengajuan \t: " << it->tglPengajuan << endl
+                    << "   Tanggal Checkin \t: " << it->tglCheckIn << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -542,7 +553,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki Pasien" << endl << endl;
+            system("cls");
+            cout << "Tidak terdapat pasien yang sedang dirawat" << endl << endl;
         }
     }
 
@@ -574,7 +586,8 @@ protected:
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Pasien telah checkout" <<endl<<endl;
             }
         }
     }
@@ -586,13 +599,13 @@ protected:
         {
             if (it->statusPasien=="has checkout")
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
-                    << "Id Akun : " << it->idAkun << endl
-                    << "Kategori : " << it->kategori << endl
-                    << "Keluhan\t : " << it->keluhan << endl
-                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
-                    << "Tanggal Checkin\t : " << it->tglCheckIn << endl
-                    << "Tanggal Checkout\t : " << it->tglCheckOut << endl;
+                cout << nomor << ". Id Pasien \t\t: " << it->idPasien << endl
+                    << "   Id Akun \t\t: " << it->idAkun << endl
+                    << "   Kategori \t\t: " << it->kategori << endl
+                    << "   Keluhan \t\t: " << it->keluhan << endl
+                    << "   Tanggal Pengajuan \t: " << it->tglPengajuan << endl
+                    << "   Tanggal Checkin \t: " << it->tglCheckIn << endl
+                    << "   Tanggal Checkout \t: " << it->tglCheckOut << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -600,7 +613,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki Pasien" << endl << endl;
+            system("cls");
+            cout << "Tidak terdapat pasien yang sembuh" << endl << endl;
         }
     }
 
@@ -611,9 +625,9 @@ protected:
         {
             if (it->statusPasien=="has checkout" && it->statusTagihan=="not paid yet")
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
-                    << "Id Akun : " << it->idAkun << endl
-                    << "Tagihan : " << it->tagihan << endl;
+                cout << nomor << ". Id Pasien \t: " << it->idPasien << endl
+                    << "   Id Akun \t: " << it->idAkun << endl
+                    << "   Tagihan \t: " << it->tagihan << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -621,7 +635,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki Pasien" << endl << endl;
+            system("cls");
+            cout << "Tidak terdapat pasien yang memiliki tagihan" << endl << endl;
         }
     }
 
@@ -650,7 +665,8 @@ protected:
                 }
                 out2.close();
                 restartPasien();
-                cout << "Data Telah Diubah" <<endl<<endl;
+                system("cls");
+                cout << "Tagihan telah diubah" <<endl<<endl;
             }
         }
     }
@@ -662,14 +678,14 @@ protected:
         {
             if (it->idAkun == id)
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
-                    << "Kategori : " << it->kategori << endl
-                    << "Keluhan\t : " << it->keluhan << endl
-                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
-                    << "Tanggal Checkin\t : " << it->tglCheckIn << endl
-                    << "Tanggal Checkout\t : " << it->tglCheckOut << endl
-                    << "Tagihan\t : " << it->tagihan << endl
-                    << "Status Tagihan\t : " << it->statusTagihan << endl;
+                cout << nomor << ". Id pasien \t\t: " << it->idPasien << endl
+                    << "   Kategori \t\t: " << it->kategori << endl
+                    << "   Keluhan \t\t: " << it->keluhan << endl
+                    << "   Tanggal pengajuan \t: " << it->tglPengajuan << endl
+                    << "   Tanggal checkin \t: " << it->tglCheckIn << endl
+                    << "   Tanggal checkout \t: " << it->tglCheckOut << endl
+                    << "   Tagihan \t\t: " << it->tagihan << endl
+                    << "   Status tagihan \t: " << it->statusTagihan << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -677,7 +693,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki keluhan" << endl << endl;
+            system("cls");
+            cout << "Tidak terdapat keluhan" << endl << endl;
         }
     }
 
@@ -688,14 +705,14 @@ protected:
         {
             if (it->kategori == type)
             {
-                cout << nomor << ". Id Pasien : " << it->idPasien << endl
-                    << "Kategori : " << it->kategori << endl
-                    << "Keluhan\t : " << it->keluhan << endl
-                    << "Tanggal Pengajuan\t : " << it->tglPengajuan << endl
-                    << "Tanggal Checkin\t : " << it->tglCheckIn << endl
-                    << "Tanggal Checkout\t : " << it->tglCheckOut << endl
-                    << "Tagihan\t : " << it->tagihan << endl
-                    << "Status Tagihan\t : " << it->statusTagihan << endl;
+                cout << nomor << ". Id pasien \t\t: " << it->idPasien << endl
+                    << "   Kategori \t\t: " << it->kategori << endl
+                    << "   Keluhan \t\t: " << it->keluhan << endl
+                    << "   Tanggal pengajuan \t: " << it->tglPengajuan << endl
+                    << "   Tanggal checkin \t: " << it->tglCheckIn << endl
+                    << "   Tanggal checkout \t: " << it->tglCheckOut << endl
+                    << "   Tagihan \t\t: " << it->tagihan << endl
+                    << "   Status tagihan \t: " << it->statusTagihan << endl;
                 cout << endl;
                 nomor++;
                 cek = 1;
@@ -703,7 +720,8 @@ protected:
         }
         if (cek == 0)
         {
-            cout << "Anda tidak memiliki Pasien" << endl << endl;
+            system("cls");
+            cout << "Tidak tedapat pasien" << endl << endl;
         }
     }
 };
@@ -747,7 +765,7 @@ protected:
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -790,12 +808,12 @@ protected:
                 break;
 
             case '6':
-                kategori = "Penyakit Dalam";
+                kategori = "Penyakit dalam";
                 y=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (y == 1);
@@ -808,7 +826,7 @@ protected:
         getline(cin, isi);
         do
         {
-            cout << "Apakah anda mengkonfirmasi Keluhan?\n";
+            cout << "Apakah anda mengkonfirmasi keluhan?\n";
             cout << "1. Iya\n";
             cout << "2. Tidak\n";
             cin >> pilih;
@@ -827,7 +845,7 @@ protected:
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -851,11 +869,11 @@ protected:
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Username Baru : ";
+                cout << "Masukan username baru : ";
                 cin >> user;
-                cout << "Masukan Password Lama : ";
+                cout << "Masukan password lama : ";
                 cin >> lama;
-                cout << "Masukan Password Baru : ";
+                cout << "Masukan password baru : ";
                 cin >> baru;
                 gantiProfil(user, lama, baru);
                 x=0;
@@ -866,7 +884,7 @@ protected:
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -920,7 +938,7 @@ protected:
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -941,30 +959,33 @@ protected:
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id Akun : ";
+                system("cls");
+                allAkun();
+                cout << "Masukan id akun : ";
                 cin >> id;
                 cout <<endl;
                 riwayatUser(id);
                 break;
             
             case '2':
-                cout << "Masukan Id Akun : ";
+                cout << "Masukan id akun : ";
                 cin >> id;
                 cout <<endl;
                 if (cekIdUser(id) == 1)
                 {
                     cout << "Masukan NIK : ";
                     cin >> nik;
-                    cout << "Masukan Nama Lengkap : ";
+                    cout << "Masukan nama lengkap : ";
                     cin.ignore();
                     getline(cin, nama);
-                    cout << "Masukan Username : ";
+                    cout << "Masukan username : ";
                     cin >> user;
                     cout << endl;
                     updateUser(id, nik, nama, user);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
 
@@ -977,16 +998,18 @@ protected:
                     hapusUser(id);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
 
             case '4':
+                system("cls");
                 x=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -999,17 +1022,17 @@ protected:
         do
         {
             allPengajuan();
-            cout << "1. Terima Keluhan\n";
-            cout << "2. Tolak Keluhan\n";
+            cout << "1. Terima keluhan\n";
+            cout << "2. Tolak keluhan\n";
             cout << "3. Kembali\n";
-            cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+            cout << "Silahkan pilih operasi yang diinginkan : ";
             cin >> pilih;
             cout <<endl;
             
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id Pasien : ";
+                cout << "Masukan id pasien : ";
                 cin >> id;
                 cout <<endl;
                 if (cekIdPasien(id) == 1)
@@ -1017,12 +1040,13 @@ protected:
                     terimaPengajuan(id);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
             
             case '2':
-                cout << "Masukan Id Pasien : ";
+                cout << "Masukan id pasien : ";
                 cin >> id;
                 cout <<endl;
                 if (cekIdPasien(id) == 1)
@@ -1030,16 +1054,18 @@ protected:
                     tolakPengajuan(id);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
 
             case '3':
+                system("cls");
                 x=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -1052,35 +1078,37 @@ protected:
         do
         {
             allDirawat();
-            cout << "1. Checkout User\n";
+            cout << "1. Checkout user\n";
             cout << "2. Kembali\n";
-            cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+            cout << "Silahkan pilih operasi yang diinginkan : ";
             cin >> pilih;
             cout <<endl;
             
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id Pasien : ";
+                cout << "Masukan id pasien : ";
                 cin >> id;
                 cout <<endl;
                 if (cekIdPasien(id) == 1)
                 {
-                    cout << "Masukan Tagihan User : ";
+                    cout << "Masukan tagihan user : ";
                     cin >> tagihan;
                     checkOutUser(id, tagihan);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
             
             case '2':
+                system("cls");
                 x=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -1099,41 +1127,48 @@ protected:
             switch (pilih)
             {
             case '1':
+                system("cls");
                 jenis = "Mata";
                 kategori(jenis);
                 break;
             
             case '2':
+                system("cls");
                 jenis = "THT";
                 kategori(jenis);
                 break;
             
             case '3':
+                system("cls");
                 jenis = "Kulit";
                 kategori(jenis);
                 break;
 
             case '4':
+                system("cls");
                 jenis = "Jantung";
                 kategori(jenis);
                 break;
 
             case '5':
+                system("cls");
                 jenis = "Gigi";
                 kategori(jenis);
                 break;
 
             case '6':
-                jenis = "Penyakit Dalam";
+                system("cls");
+                jenis = "Penyakit dalam";
                 kategori(jenis);
                 break;
 
             case '7':
+                system("cls");
                 x=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x == 1);
@@ -1146,32 +1181,34 @@ protected:
         do
         {
             allTagihan();
-            cout << "1. Bayar Tagihan User\n";
+            cout << "1. Bayar tagihan user\n";
             cout << "2. Kembali\n";
-            cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+            cout << "Silahkan pilih operasi yang diinginkan : ";
             cin >> pilih;
             cout <<endl;
             
             switch (pilih)
             {
             case '1':
-                cout << "Masukan Id Pasien : ";
+                cout << "Masukan id pasien : ";
                 cin >> id;
                 if (cekIdPasien(id) == 1)
                 {
                     bayarTagihan(id);
                 } else 
                 {
-                    cout << "User tidak ditemukan \n";
+                    system("cls");
+                    cout << "User tidak ditemukan \n\n";
                 }
                 break;
             
             case '2':
+                system("cls");
                 x=0;
                 break;
             
             default:
-                cout << "Input Salah\n\n";
+                cout << "Input salah\n\n";
                 break;
             }
         } while (x==1);
@@ -1193,14 +1230,17 @@ protected:
         cout << endl;
         if (akun::login(user, pass) == 2)
         {
+            system("cls");
             utamaUser();
         } else if (akun::login(user, pass) == 1)
         {
+            system("cls");
             utamaAdmin();
         }
         else
         {
-            cout << "Username dan Password salah\n";
+            system("cls");
+            cout << "Username dan Password salah\n\n";
         }
 
     }
@@ -1221,6 +1261,8 @@ protected:
         hash = sha256(pass);
         cout << endl;
         akun::registrasi(nik, nama, user, hash);
+        system("cls");
+        cout << "Akun telah terdaftar\n\n";
     }
 };
 
@@ -1238,7 +1280,7 @@ public:
         {
             cout << "1. Login\n";
             cout << "2. Registrasi\n";
-            cout << "Silahkan Pilih Operasi Yang Diinginkan : ";
+            cout << "Silahkan pilih operasi yang diinginkan : ";
             cin >> pilih;
             cout <<endl;
             system("cls");
@@ -1264,6 +1306,7 @@ public:
 
 int main()
 {
+    system("cls");
     init in;
     in.loginRegistrasi();
     return 0;
