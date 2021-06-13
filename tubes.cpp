@@ -265,7 +265,7 @@ protected:
         int cek=0;
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idAkun == id && it->level == 2)
             {
                 ofstream out1("akun.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
