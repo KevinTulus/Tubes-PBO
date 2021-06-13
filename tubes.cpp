@@ -221,7 +221,7 @@ protected:
         int cek=0;
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
-            if (it->idAkun == id)
+            if (it->idAkun == id && it->level ==2)
             {
                 cek = 1;
                 return 1;
@@ -230,10 +230,8 @@ protected:
         return 0;
     }
 
-    void updateUser(int id, int nik, string nama, string user, string pass)
+    void updateUser(int id, int nik, string nama, string user)
     {
-        SHA256 sha256;
-        string hash = sha256(pass);
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
             if (it->idAkun == id)
@@ -249,7 +247,7 @@ protected:
                         out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< ","  << it->password << "," << it->level << "," << it->buatAkun;
                     } else if (it->idAkun == idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << hash << "," << it->level << ","  << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << it->password << "," << it->level << ","  << it->buatAkun;
                     }
                 }
                 out2.close();
@@ -353,7 +351,7 @@ protected:
         tm* ltm = localtime(&now);
         int idAkun = idNow;
         ofstream out("pasien.csv", ios::app);
-        out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",Pending," 
+        out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",pending," 
             << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year 
             << ",null,null,null,null";
         out.close();
@@ -406,7 +404,7 @@ protected:
         int cek=0, nomor=1;
         for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
         {
-            if (it->statusPasien=="pending")
+            if (it->statusPasien =="pending")
             {
                 cout << nomor << ". Id Pasien : " << it->idPasien << endl
                     << "Id Akun : " << it->idAkun << endl
@@ -847,11 +845,11 @@ protected:
         char pilih;
         do
         {
+            system("cls");
             cout << "Keluhan\n";
             menuUtamaAdmin();
             cin >> pilih;
             cout <<endl;
-            system("cls");
             
             switch (pilih)
             {
@@ -927,7 +925,7 @@ protected:
                     cout << "Masukan Password : ";
                     cin >> pass;
                     cout << endl;
-                    updateUser(id, nik, nama, user, pass);
+                    updateUser(id, nik, nama, user);
                 } else 
                 {
                     cout << "User tidak ditemukan \n";
