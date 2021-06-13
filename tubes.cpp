@@ -310,7 +310,7 @@ protected:
 
     void startPasien()
     {   
-        ifstream inPasien("akun.csv");
+        ifstream inPasien("pasien.csv");
         string temp;
         getline(inPasien, temp, '\n');
         while(getline(inPasien, temp, '\n'))
@@ -347,7 +347,7 @@ protected:
         time_t tt = time(0);
         char* waktuPengajuan = ctime(&tt);
         int idAkun = idNow;
-        ofstream out("akun.csv", ios::app);
+        ofstream out("pasien.csv", ios::app);
         out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",Pending," << waktuPengajuan << ",null,null,null,null";
         out.close();
         restartPasien();
@@ -440,10 +440,10 @@ protected:
         {
             if (it->idAkun == id)
             {
-                ofstream out1("akun.csv");
+                ofstream out1("pasien.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
-                ofstream out2("akun.csv", ios::app);
+                ofstream out2("pasien.csv", ios::app);
                 time_t tt = time(0);
                 char* waktuCheckIn = ctime(&tt);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
@@ -470,10 +470,10 @@ protected:
         {
             if (it->idAkun == id)
             {
-                ofstream out1("akun.csv");
+                ofstream out1("pasien.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
-                ofstream out2("akun.csv", ios::app);
+                ofstream out2("pasien.csv", ios::app);
                 time_t tt = time(0);
                 char* waktuCheckIn = ctime(&tt);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
@@ -524,10 +524,10 @@ protected:
         {
             if (it->idAkun == id)
             {
-                ofstream out1("akun.csv");
+                ofstream out1("pasien.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
-                ofstream out2("akun.csv", ios::app);
+                ofstream out2("pasien.csv", ios::app);
                 time_t tt = time(0);
                 char* waktuCheckOut = ctime(&tt);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
@@ -600,10 +600,10 @@ protected:
         {
             if (it->idAkun == id)
             {
-                ofstream out1("akun.csv");
+                ofstream out1("pasien.csv");
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
-                ofstream out2("akun.csv", ios::app);
+                ofstream out2("pasien.csv", ios::app);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
                     if (it->idAkun == id)
@@ -785,7 +785,7 @@ protected:
         string user, lama, baru;
         do
         {
-            cout << "Apakah anda mengkonfirmasi Keluhan?\n";
+            cout << "Apakah anda ingin mengganti username dan password?\n";
             cout << "1. Iya\n";
             cout << "2. Tidak\n";
             cin >> pilih;
