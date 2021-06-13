@@ -75,6 +75,7 @@ protected:
     akun()
     {
         startAkun();
+        cekAdmin();
     }
 
     void startAkun()
@@ -100,6 +101,30 @@ protected:
             vecAkun.push_back(tempAkun);
         }
         inAkun.close();
+    }
+
+    void cekAdmin()
+    {
+        SHA256 sha256;
+        string password = sha256("pass");
+        int cek = 0;
+        for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
+        {
+            if (it->level != 1)
+            {
+                cek = 1;
+            }
+        }
+        if (cek == 0)
+        {
+            time_t now = time(0);
+            tm* ltm = localtime(&now);
+            ofstream out("akun.csv", ios::app);
+            out <<endl << "0,0,admin,admin," << password << ",1," 
+                << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year;
+            out.close();
+        }
+        restartAkun();
     }
 
     void restartAkun()
