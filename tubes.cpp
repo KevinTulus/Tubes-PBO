@@ -137,10 +137,11 @@ protected:
     void registrasi(string nik, string nama, string username, string password)
     {
         int id = vecAkun.size() + 1;
-        time_t tt = time(0);
-        char* waktuBuat = ctime(&tt);
+        time_t now = time(0);
+        tm* ltm = localtime(&now);
         ofstream out("akun.csv", ios::app);
-        out <<endl << id << "," << nik << "," << nama << "," << username << "," << password << ",2," << waktuBuat;
+        out <<endl << id << "," << nik << "," << nama << "," << username << "," << password << ",2," 
+            << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year;
         out.close();
         restartAkun();
     }
@@ -162,9 +163,12 @@ protected:
 
     void gantiProfil(string user, string lama, string baru)
     {
+        SHA256 sha256;
+        string hashLama = sha256(lama);
+        string hashBaru = sha256(baru);
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
-            if (it->idAkun == idNow && it->password == lama)
+            if (it->idAkun == idNow && it->password == hashLama)
             {
                 ofstream out1("akun.csv");
                 out1 << "idAkun,nik,nama,username,password,buatAkun";
@@ -177,7 +181,7 @@ protected:
                         out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->buatAkun;
                     } else if (it->idAkun == idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << user << "," << baru << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << user << "," << hashBaru << "," << it->buatAkun;
                     }
                 }
                 out2.close();
@@ -229,6 +233,8 @@ protected:
 
     void updateUser(int id, int nik, string nama, string user, string pass)
     {
+        SHA256 sha256;
+        string hash = sha256(pass);
         for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
         {
             if (it->idAkun == id)
@@ -244,7 +250,7 @@ protected:
                         out2 <<endl << it->idAkun << "," << it->nik << "," << it->nama << "," << it->username<< "," << it->password << "," << it->buatAkun;
                     } else if (it->idAkun == idNow)
                     {
-                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << pass << "," << it->buatAkun;
+                        out2 <<endl << it->idAkun << "," << nik << "," << nama << "," << user << "," << hash << "," << it->buatAkun;
                     }
                 }
                 out2.close();
@@ -344,11 +350,13 @@ protected:
     void tambah(string kategori, string keluhan)
     {
         int idPasien = vecPasien.size() + 1;
-        time_t tt = time(0);
-        char* waktuPengajuan = ctime(&tt);
+        time_t now = time(0);
+        tm* ltm = localtime(&now);
         int idAkun = idNow;
         ofstream out("pasien.csv", ios::app);
-        out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",Pending," << waktuPengajuan << ",null,null,null,null";
+        out <<endl << idPasien << "," << idAkun << "," << kategori << "," << keluhan << ",Pending," 
+            << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year 
+            << ",null,null,null,null";
         out.close();
         restartPasien();
     }
@@ -444,13 +452,15 @@ protected:
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
-                time_t tt = time(0);
-                char* waktuCheckIn = ctime(&tt);
+                time_t now = time(0);
+                tm* ltm = localtime(&now);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
                     if (it->idAkun == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," << waktuCheckIn << ",null,null,null";
+                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," 
+                            << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year
+                            << ",null,null,null";
                     }
                     if (it->idAkun != id)
                     {
@@ -474,8 +484,6 @@ protected:
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
-                time_t tt = time(0);
-                char* waktuCheckIn = ctime(&tt);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
                     if (it->idAkun == id)
@@ -528,13 +536,15 @@ protected:
                 out1 << "idAkun,nik,nama,username,password,level,buatAkun";
                 out1.close();
                 ofstream out2("pasien.csv", ios::app);
-                time_t tt = time(0);
-                char* waktuCheckOut = ctime(&tt);
+                time_t now = time(0);
+                tm* ltm = localtime(&now);
                 for(auto it = vecPasien.begin(); it != vecPasien.end(); it++)
                 {
                     if (it->idAkun == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",has checkout," << it->tglPengajuan << "," << it->tglCheckIn << "," << waktuCheckOut << "," << tagihan << ",not paid yet";
+                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",has checkout," << it->tglPengajuan << "," << it->tglCheckIn << "," 
+                            << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year
+                            << "," << tagihan << ",not paid yet";
                     }
                     if (it->idAkun != id)
                     {
