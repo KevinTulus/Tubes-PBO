@@ -452,13 +452,13 @@ protected:
                 {
                     if (it->idAkun == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," 
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",treated," << it->tglPengajuan << "," 
                             << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec << " " << ltm->tm_mday << "-" << 1 + ltm->tm_mon << "-" << 1900 + ltm->tm_year
                             << ",null,null,null";
                     }
                     if (it->idAkun != id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
                     }
                 }
                 out2.close();
@@ -482,11 +482,11 @@ protected:
                 {
                     if (it->idAkun == id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",rejected," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << ",rejected," << it->tglPengajuan << ",null,null,null,null";
                     }
                     if (it->idAkun != id)
                     {
-                        out2 <<endl << "," << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
+                        out2 <<endl  << it->idPasien << "," << it->idAkun << "," << it->kategori << "," << it->keluhan << "," << it->statusPasien << "," << it->tglPengajuan << ",null,null,null,null";
                     }
                 }
                 out2.close();
