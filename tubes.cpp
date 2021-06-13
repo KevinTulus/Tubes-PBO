@@ -23,7 +23,6 @@ protected:
         cout << "4. Jantung\n";
         cout << "5. Gigi\n";
         cout << "6. Penyakit Dalam\n";
-        cout << "7. Keluar\n";
     }
 
     void menuUtamaUser()
@@ -693,6 +692,7 @@ protected:
         char pilih;
         do
         {
+            system("cls");
             menuUtamaUser();
             cin >> pilih;
             cout <<endl;
@@ -734,26 +734,38 @@ protected:
         string isi, kategori;
         menuKategori();
         cin >> type;
-        if (type == 1)
-        {
-            kategori = "Mata";
-        } else if (type == 2)
-        {
-            kategori = "THT";
-        } else if (type == 3)
-        {
-            kategori = "Kulit";
-        } else if (type == 4)
-        {
-            kategori = "Jantung";
-        } else if (type == 5)
-        {
-            kategori = "Gigi";
-        } else if (type == 6)
-        {
-            kategori = "Penyakit Dalam";
-        }
         
+        switch (type)
+        {
+        case '1':
+            kategori = "Mata";
+            break;
+        
+        case '2':
+            kategori = "THT";
+            break;
+        
+        case '3':
+            kategori = "Kulit";
+            break;
+
+        case '4':
+            kategori = "Jantung";
+            break;
+
+        case '5':
+            kategori = "Gigi";
+            break;
+
+        case '6':
+            kategori = "Penyakit Dalam";
+            break;
+        
+        default:
+            break;
+        }
+        system("cls");
+        cout << kategori << endl;
         cout << "Keluhan\n";
         cin.ignore();
         getline(cin, isi);
@@ -835,6 +847,7 @@ protected:
         char pilih;
         do
         {
+            cout << "Keluhan\n";
             menuUtamaAdmin();
             cin >> pilih;
             cout <<endl;
