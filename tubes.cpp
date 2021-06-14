@@ -133,6 +133,18 @@ protected:
         startAkun();
     }
 
+    void welcomeWord()
+    {
+        for(auto it = vecAkun.begin(); it != vecAkun.end(); it++)
+        {
+            if (it->idAkun == idNow)
+            {
+                cout  << "Selamat Datang, " << it->nama << endl;
+                cout << endl;
+            }
+        }
+    }
+
     int login(string x, string y)
     {
         SHA256 sha256;
@@ -737,6 +749,7 @@ protected:
         char pilih;
         do
         {
+            welcomeWord();
             menuUtamaUser();
             cin >> pilih;
             cout <<endl;
