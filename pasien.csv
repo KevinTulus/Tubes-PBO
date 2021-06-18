@@ -4,3 +4,4 @@ idPasien,idAkun,kategori,keluhan,statusPasien,tglPengajuan,tglCheckIn,tglCheckOu
 3,3,Gigi,sakit gusi,rejected,1:11:4 14-6-2021,tidak checkin,tidak checkout,0,tidak memiliki tagihan
 4,1,THT,hidung pilek,has checkout,1:21:25 14-6-2021,1:43:3 14-6-2021,1:43:33 14-6-2021,500000,not paid yet
 5,3,Penyakit dalam,sakit hati,rejected,1:41:23 14-6-2021,tidak checkin,tidak checkout,0,tidak memiliki tagihan
+6,4,Mata,mata memerah,has checkout,16:10:28 15-6-2021,16:17:1 15-6-2021,16:18:1 15-6-2021,500000,paid

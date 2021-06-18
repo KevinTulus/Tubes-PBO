@@ -749,7 +749,6 @@ protected:
         char pilih;
         do
         {
-            welcomeWord();
             menuUtamaUser();
             cin >> pilih;
             cout <<endl;
@@ -1244,6 +1243,7 @@ protected:
         if (akun::login(user, pass) == 2)
         {
             system("cls");
+            welcomeWord();
             utamaUser();
         } else if (akun::login(user, pass) == 1)
         {
